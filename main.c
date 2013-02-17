@@ -59,9 +59,10 @@
 
 */
 #include <stdio.h>
+#include "init.h"
 
 int main(void){
 	printf("Please enter the secret word\t");
-
+	test();
 	return 0;
 }
