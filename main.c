@@ -62,7 +62,12 @@
 #include "init.h"
 
 int main(void){
+	char sSecretWord[20] = {0};
+
 	printf("Please enter the secret word\t");
-	test();
+	getWord(sSecretWord,sizeof(sSecretWord));
+
+	printf("The word you entered was %s\n", sSecretWord);
+
 	return 0;
 }

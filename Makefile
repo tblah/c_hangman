@@ -6,4 +6,4 @@ all: main.c init.c
 	gcc $(COMPILE_OPS) -o $(OUTPUT_NAME) $(SOURCE_FILES)
 
 clean:
-	rm $(OUTPUT_NAME)
+	rm $(OUTPUT_NAME) 

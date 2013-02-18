@@ -1,6 +1,6 @@
 #ifndef INIT_H
 #define INIT_H
 
-void test(void);
+void getWord(char* s, int length);
 
 #endif
