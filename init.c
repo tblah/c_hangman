@@ -3,7 +3,7 @@
 // this file contains functions for starting the game (stuff that comes before the main game loop)
 
 #include <stdio.h>
-#include <stdlib.h> // for exit()
+#include <stdlib.h> // for exit() and calloc()
 #include <string.h> // for strchr() and memmove() and strlen()
 #include <assert.h> // for assert()
 #include <ctype.h> // for isspace()
@@ -40,4 +40,12 @@ void getWord(char* s, int length){
 	replaceChar(s, ' '); // make the string end at the first space
 	replaceChar(s, '\n'); // remove any newlines
 
+}
+
+char* createWorkingString(char* cpPointer,const char* sWord, int* length){ // like realloc but I need to keep the origional
+	*length = strlen(sWord); // find the length of sWord until the first NULL (this is the useful part)
+	cpPointer = malloc(*length); // allocate a string of the right length
+	assert(cpPointer); // ensure that cpPointer is not NULL
+	memmove(cpPointer, sWord, *length); // copy the data into the secret word 
+	return cpPointer;
 }

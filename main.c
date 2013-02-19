@@ -60,14 +60,22 @@
 */
 #include <stdio.h>
 #include "init.h"
+#include <stdlib.h> // for free
 
 int main(void){
 	char sSecretWord[20] = {0};
+	char* sWorkingString = 0; // NULL so that it cannot be used yet
+	int iWorkingStringLength = 0; // stores the length pointed to by ^^^ IS THIS NESSECARY FOR A STRING??
 
 	printf("Please enter the secret word\t");
 	getWord(sSecretWord,sizeof(sSecretWord));
-
 	printf("The word you entered was %s\n", sSecretWord);
 
+	sWorkingString = createWorkingString(sWorkingString, sSecretWord, &iWorkingStringLength);
+	printf("The working string is %s\n", sWorkingString);
+	printf("The size of sSecretWord is %i. The size of the working string is %i\n", sizeof(sSecretWord), iWorkingStringLength);
+
+	free(sWorkingString);
+	sWorkingString = NULL; // good practice to allways make it NULL after a free. NO MATTER WHAT!
 	return 0;
 }
