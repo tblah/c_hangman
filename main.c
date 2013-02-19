@@ -14,8 +14,8 @@
 		Get guess from user
 			Output a list of all of the charichters they have not yet used
 				A string of the alphabet. Whenever a charichter is used remove it from string
-			Output the hint for the user (ie a string of #'s showing the letters they are yet to guess
-				e.g. if the strng was linux and they had guessed the i and the x: #i##x
+			Output the hint for the user (ie a string of #'s showing the letters they are yet to guess)
+				e.g. if the string was linux and they had guessed the i and the x: #i##x
 			Ask for guess
 			Validate guess (should be in loop)
 				Cut down to one charichter
