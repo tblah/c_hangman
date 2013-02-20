@@ -61,21 +61,28 @@
 #include <stdio.h>
 #include "init.h"
 #include <stdlib.h> // for free
+#include <string.h> // for strlen
+#include "getGuess.h"
 
 int main(void){
 	char sSecretWord[20] = {0};
-	char* sWorkingString = 0; // NULL so that it cannot be used yet
-	int iWorkingStringLength = 0; // stores the length pointed to by ^^^ IS THIS NESSECARY FOR A STRING??
+	char* sWorking = 0; // NULL so that it cannot be used yet
+	int isWorkingLength = 0; // stores the length pointed to by ^^^ IS THIS NESSECARY FOR A STRING??
+	char* sHint = 0;
+	char sUnused[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	char cGuess = '\n';
 
 	printf("Please enter the secret word\t");
 	getWord(sSecretWord,sizeof(sSecretWord));
-	printf("The word you entered was %s\n", sSecretWord);
+	sWorking = createWorkingString(sWorking, sSecretWord, &isWorkingLength);
+	sHint = allocHint(strlen(sWorking)+1); // +1 so that it includes the NULL charichter
 
-	sWorkingString = createWorkingString(sWorkingString, sSecretWord, &iWorkingStringLength);
-	printf("The working string is %s\n", sWorkingString);
-	printf("The size of sSecretWord is %i. The size of the working string is %i\n", sizeof(sSecretWord), iWorkingStringLength);
+	cGuess = getGuess(sUnused, sHint);	
+	printf("You guessed %c", cGuess);
 
-	free(sWorkingString);
-	sWorkingString = NULL; // good practice to allways make it NULL after a free. NO MATTER WHAT!
+	free(sHint);
+	sHint = NULL;
+	free(sWorking);
+	sWorking = NULL; // good practice to allways make it NULL after a free. NO MATTER WHAT!
 	return 0;
 }

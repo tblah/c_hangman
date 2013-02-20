@@ -3,10 +3,26 @@
 // this file contains functions for starting the game (stuff that comes before the main game loop)
 
 #include <stdio.h>
-#include <stdlib.h> // for exit() and calloc()
+#include <stdlib.h> // for exit() and malloc()
 #include <string.h> // for strchr() and memmove() and strlen()
 #include <assert.h> // for assert()
 #include <ctype.h> // for isspace()
+
+char* allocHint(const int iSize){
+	char* sHint = 0;
+	int i = 0; // to itterate through the loop bellow
+	
+	sHint=malloc(iSize); // allocate enough memmory for the string
+	assert(sHint); // make sure it didn't fail
+	
+	for (i=0; i<(iSize-1); i++)
+		sHint[i] = '#'; // make all of the values in the string (except the last one) be '#'
+
+	sHint[iSize-1] = '\0'; // make the last charichter in the string NULL
+	
+
+	return sHint;
+}
 
 void stripLeadingSpaces(char* s){
 	/* used to count through the array to find the first charichter that is not a space*/

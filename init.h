@@ -3,5 +3,6 @@
 
 void getWord(char* s, int length);
 char* createWorkingString(char* cpPointer, const char* sWord, int* length);
+char* allocHint(const int iSize);
 
 #endif
