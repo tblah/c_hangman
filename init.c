@@ -8,6 +8,23 @@
 #include <assert.h> // for assert()
 #include <ctype.h> // for isspace() and toupper()
 
+char isAllAlpha(char* s){
+	int i = 0; // for itterating through the string
+	char bAllAlpha = 1; // start assuming that they are all alpha
+
+	while (1){ // infinite loop
+		if (s[i]=='\0')
+			break; // end of string so stop
+
+		if (isalpha(s[i]) == 0) { // if it is not an alphabetic charichter
+			bAllAlpha = 0; // make this false
+			break; // no need to continue checking
+		}
+	i++;
+	}
+	return bAllAlpha;
+}
+
 void makeUpper(char* s){
 	int i = 0; // for counting in the loop bellow
 
@@ -58,15 +75,23 @@ void replaceChar(char* s, char c){ // replaces the first c in s with NULL
 }
 
 void getWord(char* s, int length){
-	if (fgets( s, length, stdin) == NULL){ // get the string
-		printf("\nERROR: fgets() in getWord() in init.c returned NULL. Cowardly refusing to continue.\n");
-		exit(-1);
-	}
+	while (1){ // infinite loop until broken by a valid input
+		printf("Please enter the secret word\t");
+		if (fgets( s, length, stdin) == NULL){ // get the string
+			printf("\nERROR: fgets() in getWord() in init.c returned NULL. Cowardly refusing to continue.\n");
+			exit(-1);
+		}
 
-	stripLeadingSpaces(s); // remove all leading spaces from s (otherwise the string would start with a null after below
-	replaceChar(s, ' '); // make the string end at the first space
-	replaceChar(s, '\n'); // remove any newlines
-	makeUpper(s); // make every letter uppercase
+		stripLeadingSpaces(s); // remove all leading spaces from s 
+		replaceChar(s, ' '); // make the string end at the first space
+		replaceChar(s, '\n'); // remove any newlines
+		makeUpper(s); // make every letter uppercase
+
+		if (isAllAlpha(s) == 1) // if every charichter in the string is either NULL or alphabetic
+			break;
+		else
+			printf("Your word can only contain letters\n");
+	}
 
 }
 

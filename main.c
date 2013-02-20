@@ -2,11 +2,13 @@
 /*
 
 	How this will work:
-		Get Secret Word form user
-			Make sure it is only one word
-				Strrchr space
-					replace with null
+		while secret word is not valid
+			Get Secret Word form user
+				Make sure it is only one word
+					Strrchr space
+						replace with null
 			Make it all uppercase
+		If it is all alphabetical then continue. Else loop.
 		Set up working string
 			find the useful length of secret word
 			dynamically aloccate working string to the right length
@@ -74,7 +76,6 @@ int main(void){
 	char sUnused[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	char cGuess = '\n';
 
-	printf("Please enter the secret word\t");
 	getWord(sSecretWord,sizeof(sSecretWord));
 	sWorking = createWorkingString(sWorking, sSecretWord, &isWorkingLength);
 	sHint = allocHint(strlen(sWorking)+1); // +1 so that it includes the NULL charichter
