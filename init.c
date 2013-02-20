@@ -6,7 +6,18 @@
 #include <stdlib.h> // for exit() and malloc()
 #include <string.h> // for strchr() and memmove() and strlen()
 #include <assert.h> // for assert()
-#include <ctype.h> // for isspace()
+#include <ctype.h> // for isspace() and toupper()
+
+void makeUpper(char* s){
+	int i = 0; // for counting in the loop bellow
+
+	while (1){ // infinite loop
+		if (s[i]=='\0')
+			break; // if we have reached the end of the string then exit the loop
+		s[i] = toupper(s[i]); // make the charichter upper case.
+		i++;
+	}	
+}
 
 char* allocHint(const int iSize){
 	char* sHint = 0;
@@ -37,7 +48,7 @@ void stripLeadingSpaces(char* s){
 	memmove(s, pcPosCounter, strlen(pcPosCounter));	
 }
 
-void replaceChar(char* s, char c){
+void replaceChar(char* s, char c){ // replaces the first c in s with NULL
 	char* pcReplace = 0; // as a NULL pointer so that it cannot be used yet
 
 	pcReplace = strchr(s,c); // find the specified charichter
@@ -55,6 +66,7 @@ void getWord(char* s, int length){
 	stripLeadingSpaces(s); // remove all leading spaces from s (otherwise the string would start with a null after below
 	replaceChar(s, ' '); // make the string end at the first space
 	replaceChar(s, '\n'); // remove any newlines
+	makeUpper(s); // make every letter uppercase
 
 }
 
@@ -65,3 +77,4 @@ char* createWorkingString(char* cpPointer,const char* sWord, int* length){ // li
 	memmove(cpPointer, sWord, *length); // copy the data into the secret word 
 	return cpPointer;
 }
+

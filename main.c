@@ -6,6 +6,7 @@
 			Make sure it is only one word
 				Strrchr space
 					replace with null
+			Make it all uppercase
 		Set up working string
 			find the useful length of secret word
 			dynamically aloccate working string to the right length
@@ -20,6 +21,7 @@
 			Validate guess (should be in loop)
 				Cut down to one charichter
 				Check is a letter (ctypes.h)?
+				Make it uppercase
 				Look to see if this has allready been used
 		Process Guess
 			Remove guessed charichter from the unused letters array
@@ -78,7 +80,7 @@ int main(void){
 	sHint = allocHint(strlen(sWorking)+1); // +1 so that it includes the NULL charichter
 
 	cGuess = getGuess(sUnused, sHint);	
-	printf("You guessed %c", cGuess);
+	printf("You guessed %c\n", cGuess);
 
 	free(sHint);
 	sHint = NULL;
