@@ -1,7 +1,25 @@
 // this file contains the functions nessecary for processing the guess
 
-#include <string.h> // for strlen
+#include <string.h> // for strlen and strchr
 #include <stdlib.h> // for dynamic memmory
+
+void UpdateHint(char* sWorkingString, char* sHint, char cGuess){
+	while (1 == 1){
+		// while there are still occurances of the guess in working string
+		char* cpLocation = NULL;
+
+		cpLocation = strchr(sWorkingString, cGuess);
+		if (cpLocation == NULL)
+			break; // letter not found so leave the loop
+
+		// put the guess charichter at that index in the hint:
+		int iIndex = cpLocation - sWorkingString;
+		sHint[iIndex] = *cpLocation;		
+
+		// replace the charichter in the working string with a '*'
+		*cpLocation = '*';
+	}
+}
 
 char* UpdateUnused(char* sOld, const char ccGuess){
 	char* sNew = NULL; // so that it cannot be used

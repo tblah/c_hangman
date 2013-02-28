@@ -44,7 +44,7 @@
 							this will make UnusedLetters point to the new array 
 								and update the length
 		 	Add charichter to the user hint
-				void UpdateHint(char* working string, int working length, char* hint, int length hint)
+				void UpdateHint(char* working string, char* hint, char cGuess)
 					while (there are occurences of that charichter in the WORKING STRING)
 						Find first occurance in that string (strchr)
 						Put the guess charichter at that index in the hint
@@ -76,23 +76,29 @@ int main(void){
 	int isWorkingLength = 0; // stores the length pointed to by ^^^ IS THIS NESSECARY FOR A STRING??
 	char* sHint = 0;
 	char* sUnused = 0;
-	char cGuess = '\n';
+	char cGuess = '\0';
+	char bGameRuning = 1; // used as a boolean
 	
 	sUnused = malloc(27);
 	assert(sUnused);
 	strncpy(sUnused, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", 27);
-
-
 	getWord(sSecretWord,sizeof(sSecretWord));
 	sWorking = createWorkingString(sWorking, sSecretWord, &isWorkingLength);
 	sHint = allocHint(strlen(sWorking)+1); // +1 so that it includes the NULL charichter
+	// sceen needs to be cleared here so that the word which was inputted cannot be seen
 
-	cGuess = getGuess(sUnused, sHint);	
-	printf("You guessed %c\n", cGuess);
+	while (bGameRuning != 0){
+		cGuess = getGuess(sUnused, sHint);	// does the printing for us
+		//printf("You guessed %c\n", cGuess);
 
-	sUnused = UpdateUnused(sUnused, cGuess);	
-	printf("sUnused is now %s", sUnused);
+		sUnused = UpdateUnused(sUnused, cGuess);	
+		//printf("sUnused is now %s", sUnused);
+		
+		UpdateHint(sWorking, sHint, cGuess);
 	
+	}	
+	
+	// clean up
 	free(sUnused);
 	sUnused = NULL;
 	free(sHint);
