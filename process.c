@@ -3,6 +3,17 @@
 #include <string.h> // for strlen and strchr
 #include <stdlib.h> // for dynamic memmory
 
+int numLeftToGuess(char* s){ // returns the number of '#'s in the string (i.e. the number of letters left
+	int iNumLeft = 0; // used as bool
+	int i = 0;
+
+	for (i=0; i <= strlen(s);i++) // loop through whole string
+		if (s[i] == '#')
+			iNumLeft++; // '#' signifies a letter which has not been guessed.
+	
+	return iNumLeft;
+}
+
 void UpdateHint(char* sWorkingString, char* sHint, char cGuess){
 	while (1 == 1){
 		// while there are still occurances of the guess in working string

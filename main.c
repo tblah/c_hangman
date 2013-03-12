@@ -78,6 +78,7 @@ int main(void){
 	char* sUnused = 0;
 	char cGuess = '\0';
 	char bGameRuning = 1; // used as a boolean
+	int iNumLeft; // stores the number of letters the user still needs to guess
 	
 	sUnused = malloc(27);
 	assert(sUnused);
@@ -95,7 +96,14 @@ int main(void){
 		//printf("sUnused is now %s", sUnused);
 		
 		UpdateHint(sWorking, sHint, cGuess);
-	
+		iNumLeft = numLeftToGuess(sHint);
+
+		if (iNumLeft == 0){ // check to see if all of the letters have been guessed
+			printf("\nCongratulations to the guesser. They have won!\n");
+			printf("The secret word was %s", sSecretWord);
+			bGameRuning = 0;
+		}
+				
 	}	
 	
 	// clean up
