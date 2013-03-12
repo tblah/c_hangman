@@ -73,7 +73,6 @@
 int main(void){
 	char sSecretWord[20] = {0};
 	char* sWorking = 0; // NULL so that it cannot be used yet
-	int isWorkingLength = 0; // stores the length pointed to by ^^^ IS THIS NESSECARY FOR A STRING??
 	char* sHint = 0;
 	char* sUnused = 0;
 	char cGuess = '\0';
@@ -84,7 +83,7 @@ int main(void){
 	assert(sUnused);
 	strncpy(sUnused, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", 27);
 	getWord(sSecretWord,sizeof(sSecretWord));
-	sWorking = createWorkingString(sWorking, sSecretWord, &isWorkingLength);
+	sWorking = createWorkingString(sWorking, sSecretWord);
 	sHint = allocHint(strlen(sWorking)+1); // +1 so that it includes the NULL charichter
 	// sceen needs to be cleared here so that the word which was inputted cannot be seen
 

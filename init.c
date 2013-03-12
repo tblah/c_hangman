@@ -95,11 +95,11 @@ void getWord(char* s, int length){
 
 }
 
-char* createWorkingString(char* cpPointer,const char* sWord, int* length){ // like realloc but I need to keep the origional
-	*length = strlen(sWord); // find the length of sWord until the first NULL (this is the useful part)
-	cpPointer = malloc(*length); // allocate a string of the right length
+char* createWorkingString(char* cpPointer,const char* sWord){ // like realloc but I need to keep the origional
+	int length = strlen(sWord); // find the length of sWord until the first NULL (this is the useful part)
+	cpPointer = malloc(length); // allocate a string of the right length
 	assert(cpPointer); // ensure that cpPointer is not NULL
-	memmove(cpPointer, sWord, *length); // copy the data into the secret word 
+	memmove(cpPointer, sWord, length); // copy the data into the secret word 
 	return cpPointer;
 }
 
