@@ -14,14 +14,20 @@ int numLeftToGuess(char* s){ // returns the number of '#'s in the string (i.e. t
 	return iNumLeft;
 }
 
-void UpdateHint(char* sWorkingString, char* sHint, char cGuess){
+char UpdateHint(char* sWorkingString, char* sHint, char cGuess){ // returns true if the guess was correct
+	char* cpLocation = NULL;
+
+	if (strchr(sWorkingString, cGuess) == NULL) // if it ain't in the word, don't bother searching
+		return 0;
+
 	while (1 == 1){
 		// while there are still occurances of the guess in working string
-		char* cpLocation = NULL;
+		cpLocation = NULL;
 
 		cpLocation = strchr(sWorkingString, cGuess);
-		if (cpLocation == NULL)
+		if (cpLocation == NULL) 
 			break; // letter not found so leave the loop
+		
 
 		// put the guess charichter at that index in the hint:
 		int iIndex = cpLocation - sWorkingString;
@@ -29,7 +35,9 @@ void UpdateHint(char* sWorkingString, char* sHint, char cGuess){
 
 		// replace the charichter in the working string with a '*'
 		*cpLocation = '*';
+
 	}
+	return 1;
 }
 
 char* UpdateUnused(char* sOld, const char ccGuess){

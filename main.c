@@ -78,6 +78,7 @@ int main(void){
 	char cGuess = '\0';
 	char bGameRuning = 1; // used as a boolean
 	int iNumLeft; // stores the number of letters the user still needs to guess
+	int iRemainingLives = 7; // the number of lives left (one is lost whenever an incorrect guess is made)
 	
 	sUnused = malloc(27);
 	assert(sUnused);
@@ -94,11 +95,21 @@ int main(void){
 		sUnused = UpdateUnused(sUnused, cGuess);	
 		//printf("sUnused is now %s", sUnused);
 		
-		UpdateHint(sWorking, sHint, cGuess);
+		if (UpdateHint(sWorking, sHint, cGuess) == 0) { // update the hint and deal with the lives condition
+			iRemainingLives = iRemainingLives - 1;
+			if (iRemainingLives == 0){
+				printf("\nCongratulations to the player who chose the secret word. ");
+				printf("The guessing player has run out of guesses\n");
+				bGameRuning = 0; // do not loop again
+			}
+			else
+				printf("You have %i guesses remaining\n",iRemainingLives );
+		}
+
 		iNumLeft = numLeftToGuess(sHint);
 
 		if (iNumLeft == 0){ // check to see if all of the letters have been guessed
-			printf("\nCongratulations to the guesser. They have won!\n");
+			printf("\nCongratulations to the guesser.You  have won!\n");
 			printf("The secret word was %s", sSecretWord);
 			bGameRuning = 0;
 		}
