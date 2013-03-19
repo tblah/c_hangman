@@ -110,7 +110,7 @@ int main(void){
 
 		if (iNumLeft == 0){ // check to see if all of the letters have been guessed
 			printf("\nCongratulations to the guesser.You  have won!\n");
-			printf("The secret word was %s", sSecretWord);
+			printf("The secret word was %s\n", sSecretWord);
 			bGameRuning = 0;
 		}
 				
